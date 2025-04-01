@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Zeyada&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        
+      
+
+        <div class="menu",id="mainMenu">   
+            <a href="#services">Our Services</a>
+            <a href="#products">Our Products</a>
+            <a href="#commande">Order</a>
+            <a href="#GilaniMap">How to find us</a>
+            <img src="logo2_bonne_taille.png" alt="Gilani's logo" class="logoMenu">
+        </div> 
+
+        <div>
+            <h1 id="GilaniT">GILANI</h1>
+            <img src="logo2_bonne_taille.png" alt="Gilani's logo" class="logo">
+            <h2 id="slogan">Just Smoke It</h2>
+        </div>
+
+        <div class="separator"></div>
+
+        <div id="services">
+            <h3 id="serviceTitre">Services</h3>
+            <img class="imageP" id="s1" src="service1.jpg" alt="chicha 1">
+            
+        </div>
+
+        <div class="separator"></div>
+
+        <div id="products">
+            <div class="chicha">
+                <h3 id="chichaTitre">Shishas</h3>
+                <img class="imageP" id="ch1" src="chicha1.jpg" alt="chicha 1">
+                <img class="imageP" id="ch2" src="chicha2.png" alt="chicha 2">
+            </div>
+            <div class="separator2"></div>
+            <div class="parfum">
+                <h3 id="goutTitre">Flavors</h3>
+                <img class="imageP" id="caviar" src="caviar.png" alt="caviar">
+                <img class="imageP" id="champ" src="champagne.png" alt="champagne">
+            </div>
+        </div>
+        <div class="separator"></div>
+        <div class="commandeDiv" id="MainDivCommande">
+            <button onclick="window.location.href='commande.html'">Order</button>
+        </div>
+
+        <div class="separator"></div>
+        <div class="GilaniMap" id="GilaniMap">
+            <h2 id="mapTitre">How to Find Us</h2>
+            <div id="map"></div>
+            <div class="tooltip" id="tooltip"></div> <!-- Tooltip -->
+        
+            <script>
+                var map = L.map('map', {
+                    minZoom: 2,
+                    maxZoom: 5,
+                    zoomControl: false,
+                    scrollWheelZoom: false,  // 🔹 Désactive le zoom avec la molette
+                    doubleClickZoom: false,  // 🔹 Désactive le zoom au double-clic
+                    dragging: true           // 🔹 Permet de déplacer la carte normalement
+                }).setView([20, 0], 2);
+        
+                // Fond blanc pour un style planisphère simple
+                L.tileLayer('', { attribution: '' }).addTo(map);
+        
+                // Pays en rouge par défaut
+                const specialCountries = ["France", "United States of America", "Turkey", "United Arab Emirates"];
+        
+                // Sélection du tooltip
+                const tooltip = document.getElementById("tooltip");
+        
+                // Fonction pour gérer les interactions
+                function onEachFeature(feature, layer) {
+                    let countryName = feature.properties.name;
+                    let defaultColor = specialCountries.includes(countryName) ? 'red' : 'white';
+        
+                    layer.setStyle({ fillColor: defaultColor, fillOpacity: 1 });
+        
+                    layer.on('mouseover', function (e) {
+                        if (specialCountries.includes(feature.properties.name)){
+                            layer.setStyle({ fillColor: 'green', fillOpacity: 0.7 });
+                        } else{
+                            layer.setStyle({ fillColor: 'grey', fillOpacity: 0.7 });
+                        }
+                        
+                        
+        
+                        // Afficher le tooltip avec le nom du pays
+                        tooltip.style.display = "block";
+                        tooltip.innerHTML = specialCountries.includes(countryName) ? "We are Here" : "Not Yet";
+        
+                        document.addEventListener("mousemove", updateTooltipPosition);
+                    });
+        
+                    layer.on('mouseout', function () {
+                        layer.setStyle({ fillColor: defaultColor, fillOpacity: 1 });
+        
+                        // Cacher le tooltip
+                        tooltip.style.display = "none";
+                        document.removeEventListener("mousemove", updateTooltipPosition);
+                    });
+                }
+        
+                // Fonction pour déplacer le tooltip avec la souris
+                function updateTooltipPosition(e) {
+                    tooltip.style.left = (e.pageX + 15) + "px";
+                    tooltip.style.top = (e.pageY + 15) + "px";
+                }
+        
+                // Chargement de la carte avec GeoJSON
+                fetch("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json")
+                    .then(response => response.json())
+                    .then(data => {
+                        L.geoJSON(data, {
+                            style: {
+                                color: "black",
+                                weight: 1,
+                                fillOpacity: 1
+                            },
+                            onEachFeature: onEachFeature
+                        }).addTo(map);
+                    });
+        
+            </script>
+            </div>
+
+
+
+        <script src="MainPage.js" async defer></script>
+    </body>
+</html>

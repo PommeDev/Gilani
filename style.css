@@ -1,0 +1,195 @@
+/* 🌍 Réinitialisation générale */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* 🏷️ Titre principal */
+.mainTilte {
+    font-size: 3rem;
+    text-align: center;
+    position: relative;
+    margin-top: 20px;
+}
+
+/* 📍 Logo à droite du titre */
+#GilaniT {
+    font-size: 4rem; /* Augmente la taille */
+    color: #3F7384; /* Bleu foncé */
+    position: relative;
+    text-align: center;
+    font-family: "Zeyada", cursive;
+    font-weight: 400;
+    font-style: normal;
+    margin-top: 20px;
+}
+
+.logo {
+    width: 50px;  /* Taille réduite du logo */
+    position: absolute;
+    top: 0;
+    right: -60px; /* Décalage pour qu'il soit à droite du titre */
+}
+
+/* 🎭 Slogan incurvé comme une assiette */
+#slogan {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 10px;
+    display: block;
+    position: relative;
+    width: 100%;
+}
+
+/* Effet incurvé */
+#slogan::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    top: -10px;
+    left: 0;
+    border-radius: 50%;
+    box-shadow: 0px -15px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 📌 Menu de navigation */
+.menu {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background-color: #5698AD;
+    padding: 15px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 10px 15px;
+}
+
+.menu a:hover {
+    background-color: #006573;
+    border-radius: 5px;
+}
+
+.logoMenu {
+    height: 40px; /* Même hauteur que le texte des liens */
+    width: auto; /* Ajustement proportionnel */
+    margin-left: 10px; /* Un petit espace à gauche */
+}
+
+/* 📌 Carte */
+#map {
+    height: 600px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* 📌 Tooltip */
+.tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: none;
+    font-size: 14px;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 10000;
+}
+
+/* 📌 Style de la section produits */
+#products, #services {
+    display: flex;
+    flex-direction: column; /* 🔹 Empile les sections en colonne */
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+    position: relative;
+    width: 100%;
+}
+
+/* 🔹 Séparation horizontale */
+.separator {
+    width: 80%; /* Largeur de la ligne */
+    height: 2px; /* Épaisseur */
+    background-color: #006573; /* Couleur */
+    margin: 20px auto;
+}
+
+.separator2 {
+    width: 50%; /* Largeur de la ligne */
+    height: 1px; /* Épaisseur */
+    background-color: #006573; /* Couleur */
+    margin: 20px auto;
+}
+
+
+/* 🏷️ Titres centrés */
+#chichaTitre, #goutTitre, #mapTitre, #serviceTitre {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* 📦 Style des conteneurs */
+.chicha, .parfum {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* 📷 Style des images */
+.imageP {
+    width: 120px;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+    margin: 5px;
+}
+
+/* Effet au survol */
+.imageP:hover {
+    transform: scale(1.1);
+}
+
+/* 🛠️ Responsive pour écrans plus petits */
+@media (max-width: 768px) {
+    .mainTilte {
+        font-size: 2.5rem;
+    }
+
+    img[alt="Gilani's logo"] {
+        width: 40px;
+        right: -50px;
+    }
+
+    .menu {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu a {
+        font-size: 1rem;
+        padding: 8px 12px;
+    }
+
+    .imageP {
+        width: 90px;
+    }
+}
+
+body {
+    background-color: #FEF3EA; /* Beige clair */
+    margin: 0;
+    padding: 0;
+}
+

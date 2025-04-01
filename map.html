@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte du Monde Simplifiée</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #map {
+            height: 600px;
+            width: 100%;
+            border-radius: 10px;
+        }
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: none;
+            font-size: 14px;
+            pointer-events: none;
+            white-space: nowrap;
+            z-index: 10000;
+        }
+    </style>
+</head>
+<body>
+    <div class="GilaniMap">
+    <h2>Carte du Monde avec Tooltips</h2>
+    <div id="map"></div>
+    <div class="tooltip" id="tooltip"></div> <!-- Tooltip -->
+
+    <script>
+        var map = L.map('map', {
+            minZoom: 2,
+            maxZoom: 5,
+            zoomControl: false
+        }).setView([20, 0], 2);
+
+        // Fond blanc pour un style planisphère simple
+        L.tileLayer('', { attribution: '' }).addTo(map);
+
+        // Pays en rouge par défaut
+        const specialCountries = ["France", "United States of America", "Turkey", "United Arab Emirates"];
+
+        // Sélection du tooltip
+        const tooltip = document.getElementById("tooltip");
+
+        // Fonction pour gérer les interactions
+        function onEachFeature(feature, layer) {
+            let countryName = feature.properties.name;
+            let defaultColor = specialCountries.includes(countryName) ? 'red' : 'white';
+
+            layer.setStyle({ fillColor: defaultColor, fillOpacity: 1 });
+
+            layer.on('mouseover', function (e) {
+                if (specialCountries.includes(feature.properties.name)){
+                    layer.setStyle({ fillColor: 'green', fillOpacity: 0.7 });
+                } else{
+                    layer.setStyle({ fillColor: 'grey', fillOpacity: 0.7 });
+                }
+                
+                
+
+                // Afficher le tooltip avec le nom du pays
+                tooltip.style.display = "block";
+                tooltip.innerHTML = specialCountries.includes(countryName) ? "We are Here" : "Not Yet";
+
+                document.addEventListener("mousemove", updateTooltipPosition);
+            });
+
+            layer.on('mouseout', function () {
+                layer.setStyle({ fillColor: defaultColor, fillOpacity: 1 });
+
+                // Cacher le tooltip
+                tooltip.style.display = "none";
+                document.removeEventListener("mousemove", updateTooltipPosition);
+            });
+        }
+
+        // Fonction pour déplacer le tooltip avec la souris
+        function updateTooltipPosition(e) {
+            tooltip.style.left = (e.pageX + 15) + "px";
+            tooltip.style.top = (e.pageY + 15) + "px";
+        }
+
+        // Chargement de la carte avec GeoJSON
+        fetch("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json")
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: {
+                        color: "black",
+                        weight: 1,
+                        fillOpacity: 1
+                    },
+                    onEachFeature: onEachFeature
+                }).addTo(map);
+            });
+
+    </script>
+    </div>
+</body>
+</html>
