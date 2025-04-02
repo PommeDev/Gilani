@@ -150,7 +150,7 @@
 /* 📷 Style des images */
 .imageP {
     width: 120px;
-    height: auto;
+    height: 120px;
     border-radius: 10px;
     transition: transform 0.3s ease-in-out;
     margin: 5px;
@@ -193,3 +193,57 @@ body {
     padding: 0;
 }
 
+
+
+
+.commandeDiv {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#Reservation {
+    color: #333;
+}
+
+.form-container {
+    padding: 10px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+p#prix {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}

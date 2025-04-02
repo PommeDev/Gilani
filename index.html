@@ -29,12 +29,12 @@
             <a href="#products">Our Products</a>
             <a href="#commande">Order</a>
             <a href="#GilaniMap">How to find us</a>
+            <a href="#partner">Partnerships</a>
             <img src="logo2_bonne_taille.png" alt="Gilani's logo" class="logoMenu">
         </div> 
 
         <div>
             <h1 id="GilaniT">GILANI</h1>
-            <img src="logo2_bonne_taille.png" alt="Gilani's logo" class="logo">
             <h2 id="slogan">Just Smoke It</h2>
         </div>
 
@@ -63,7 +63,42 @@
         </div>
         <div class="separator"></div>
         <div class="commandeDiv" id="MainDivCommande">
-            <button onclick="window.location.href='commande.html'">Order</button>
+            
+            <h2 id="Reservation">Reservation</h2>
+            <div class="form-container">
+                <form>
+                    <label for="nom">Last Name:</label>
+                    <input type="text" id="nom" name="nom" required>
+                    
+                    <label for="prenom">First Name:</label>
+                    <input type="text" id="prenom" name="prenom" required>
+                    
+                    <label for="telephone">Phone Number:</label>
+                    <input type="tel" id="telephone" name="telephone" required>
+                    
+                    <label for="cb">Credit Card Number:</label>
+                    <input type="text" id="cb" name="cb">
+                    
+                    <label for="formule">Choose a package:</label>
+                    <select id="formule" name="formule" onchange="updatePrice()">
+                        <option value="3">3h - €1,000</option>
+                        <option value="6">6h - €2,000</option>
+                        <option value="9">9h - €3,000</option>
+                    </select>
+                    
+                    <p id="prix">Price: €1,000</p>
+                    
+                    <button onclick="window.location.href='commande.html'">Order</button>
+                </form>
+            </div>
+            
+            <script async defer>
+                function updatePrice() {
+                    const formule = document.getElementById("formule").value;
+                    const prix = (formule/3) * 1000;
+                    document.getElementById("prix").innerText = "Price: " + prix + "€";
+                }
+            </script>
         </div>
 
         <div class="separator"></div>
@@ -146,6 +181,14 @@
             </script>
             </div>
 
+
+            <div class="separator"></div>
+
+            <div class="partenaireDiv" id="partner">
+                <img src="benz.jpg" alt="Benzou" class="imageP">
+                <img src="doncic.jpg" alt="Doncic" class="imageP">
+                <img src="mbappe.jpg" alt="Mbappe" class="imageP">   
+            </div>
 
 
         <script src="MainPage.js" async defer></script>
