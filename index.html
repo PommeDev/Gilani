@@ -21,209 +21,233 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        
-      
+        <div id="loading-screen">
+            <img src="A-luxury-chicha_-with-smoke.gif" alt="chargement">
 
-        <div class="menu",id="mainMenu">   
-            <a href="#services">Our Services</a>
-            <a href="#products">Our Products</a>
-            <a href="#commande">Order</a>
-            <a href="#GilaniMap">How to find us</a>
-            <a href="#partner">Partnerships</a>
-            <img src="logo2_bonne_taille.png" alt="Gilani's logo" class="logoMenu">
-        </div> 
-
-        <div>
-            <h1 id="GilaniT">GILANI</h1>
-            <h2 id="slogan">Just Smoke It</h2>
         </div>
 
-        <div class="separator"></div>
 
-        <div id="services">
-            <h3 id="serviceTitre">Services</h3>
-            <div class="serviceImage">
-                <img class="imageP" id="s1" src="service1.jpg" alt="service 1">
-                <img class="imageP" id="s1" src="service2.webp" alt="service 2">
+        <div id="content">
+
+            <img src="fleur.png" class="background-image image1" alt="Décoration 1">
+            <img src="fleur.png" class="background-image image2" alt="Décoration 2">
+            <img src="fleur.png" class="background-image image3" alt="Décoration 3">
+
+
+
+            <div class="menu",id="mainMenu">   
+                <a href="#services">Our Services</a>
+                <a href="#products">Our Products</a>
+                <a href="#commande">Order</a>
+                <a href="#GilaniMap">How to find us</a>
+                <a href="#partner">Partnerships</a>
+                <img src="logo2_bonne_taille.png" alt="Gilani's logo" class="logoMenu">
+            </div> 
+
+            <div>
+                <h1 id="GilaniT">GILANI</h1>
+                <h2 id="slogan">Just Smoke It</h2>
             </div>
-        </div>
-
-        <div class="separator"></div>
-
-        <div id="products">
-            <div class="chicha">
-                <h3 id="chichaTitre">Chichas</h3>
-                <div class="chichImage">
-                    <img class="imageP" id="ch1" src="chicha1.jpg" alt="chicha 1">
-                    <img class="imageP" id="ch2" src="chicha2.png" alt="chicha 2">
-                </div>
-            </div>
-            <div class="separator2"></div>
-            <div class="parfum">
-                <h3 id="goutTitre">Flavors</h3>
-                <div class="prodImage">
-                    <img class="imageP" id="caviar" src="caviar.png" alt="caviar">
-                    <img class="imageP" id="champ" src="champagne.png" alt="champagne">
-                </div>
-            </div>
-        </div>
-        <div class="separator"></div>
-        <div class="commandeDiv" id="MainDivCommande">
-            
-            <h2 id="Reservation">Reservation</h2>
-            <div class="form-container">
-                <form id="reservationForm" onsubmit="return validateForm()">
-                    <label for="nom">Last Name:</label>
-                    <input type="text" id="nom" name="nom" required>
-                    
-                    <label for="prenom">First Name:</label>
-                    <input type="text" id="prenom" name="prenom" required>
-                    
-                    <label for="telephone">Phone Number:</label>
-                    <input type="tel" id="telephone" name="telephone" required>
-                    
-                    <label for="cb">Credit Card Number:</label>
-                    <input type="text" id="cb" name="cb" required>
-                    
-                    <label for="formule">Choose a package:</label>
-                    <select id="formule" name="formule" onchange="updatePrice()">
-                        <option value="3">3h - €1,000</option>
-                        <option value="6">6h - €2,000</option>
-                        <option value="9">9h - €3,000</option>
-                    </select>
-                    
-                    <p id="prix">Price: €1,000</p>
-                    
-                    <button type="submit">Order</button>
-                </form>
-            </div>
-            
-            <script async defer>
-                function updatePrice() {
-                    const formule = document.getElementById("formule").value;
-                    const prix = (formule/3) * 1000;
-                    document.getElementById("prix").innerText = "Price: " + prix + "€";
-                }
-
-                function validateForm() {
-                const nom = document.getElementById("nom").value.trim();
-                const prenom = document.getElementById("prenom").value.trim();
-                const telephone = document.getElementById("telephone").value.trim();
-                const cb = document.getElementById("cb").value.trim();
-
-                if (!nom || !prenom || !telephone || !cb) {
-                    alert("Please fill in all required fields.");
-                    return false;
-                }
-                
-                window.location.href = 'commande.html';
-                return false; // Prevent actual form submission
-            }
-
-            </script>
-        </div>
-
-        <div class="separator"></div>
-        <div class="GilaniMap" id="GilaniMap">
-            <h2 id="mapTitre">How to Find Us</h2>
-            <div id="map"></div>
-            <div class="tooltip" id="tooltip"></div> <!-- Tooltip -->
-        
-            <script>
-                var map = L.map('map', {
-                    minZoom: 2,
-                    maxZoom: 5,
-                    zoomControl: false,
-                    scrollWheelZoom: false,  // 🔹 Désactive le zoom avec la molette
-                    doubleClickZoom: false,  // 🔹 Désactive le zoom au double-clic
-                    dragging: true           // 🔹 Permet de déplacer la carte normalement
-                }).setView([20, 0], 2);
-        
-                // Fond blanc pour un style planisphère simple
-                L.tileLayer('', { attribution: '' }).addTo(map);
-        
-                // Pays en rouge par défaut
-                const specialCountries = ["France", "United States of America", "Turkey", "United Arab Emirates"];
-        
-                // Sélection du tooltip
-                const tooltip = document.getElementById("tooltip");
-        
-                // Fonction pour gérer les interactions
-                function onEachFeature(feature, layer) {
-                    let countryName = feature.properties.name;
-                    let defaultColor = specialCountries.includes(countryName) ? 'red' : 'white';
-        
-                    layer.setStyle({ fillColor: defaultColor, fillOpacity: 1 });
-        
-                    layer.on('mouseover', function (e) {
-                        if (specialCountries.includes(feature.properties.name)){
-                            layer.setStyle({ fillColor: 'green', fillOpacity: 0.7 });
-                        } else{
-                            layer.setStyle({ fillColor: 'grey', fillOpacity: 0.7 });
-                        }
-                        
-                        
-        
-                        // Afficher le tooltip avec le nom du pays
-                        tooltip.style.display = "block";
-                        tooltip.innerHTML = specialCountries.includes(countryName) ? "We are Here" : "Not Yet";
-        
-                        document.addEventListener("mousemove", updateTooltipPosition);
-                    });
-        
-                    layer.on('mouseout', function () {
-                        layer.setStyle({ fillColor: defaultColor, fillOpacity: 1 });
-        
-                        // Cacher le tooltip
-                        tooltip.style.display = "none";
-                        document.removeEventListener("mousemove", updateTooltipPosition);
-                    });
-                }
-        
-                // Fonction pour déplacer le tooltip avec la souris
-                function updateTooltipPosition(e) {
-                    tooltip.style.left = (e.pageX + 15) + "px";
-                    tooltip.style.top = (e.pageY + 15) + "px";
-                }
-        
-                // Chargement de la carte avec GeoJSON
-                fetch("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json")
-                    .then(response => response.json())
-                    .then(data => {
-                        L.geoJSON(data, {
-                            style: {
-                                color: "black",
-                                weight: 1,
-                                fillOpacity: 1
-                            },
-                            onEachFeature: onEachFeature
-                        }).addTo(map);
-                    });
-        
-            </script>
-            </div>
-
 
             <div class="separator"></div>
 
-            <div class="partner" id="partner">
-                <h3 id="partnerTitre">PartnerShips</h3>
-                <div class="partnerImg">
-                    <div>
-                        <img src="benz.jpg" alt="Benzou" class="imageP">
-                        <p>Benzema</p>
-                    </div>
-                    <div>
-                        <img src="doncic.jpg" alt="Doncic" class="imageP">
-                        <p>Doncic</p>
-                    </div>
-                    <div>
-                        <img src="mbappe.jpg" alt="Mbappe" class="imageP">
-                        <p>Mbappe</p>
-                    </div>
+            <div id="services">
+                <h3 id="serviceTitre">Services</h3>
+                <div class="serviceImage">
+                    <img class="imageP" id="s1" src="service1.jpg" alt="service 1">
+                    <img class="imageP" id="s1" src="service2.webp" alt="service 2">
                 </div>
             </div>
 
+            <div class="separator"></div>
+
+            <div id="products">
+                <div class="chicha">
+                    <h3 id="chichaTitre">Chichas</h3>
+                    <div class="chichImage">
+                        <img class="imageP" id="ch1" src="chicha1.jpg" alt="chicha 1">
+                        <img class="imageP" id="ch2" src="chicha2.png" alt="chicha 2">
+                    </div>
+                </div>
+                <div class="separator2"></div>
+                <div class="parfum">
+                    <h3 id="goutTitre">Flavors</h3>
+                    <div class="prodImage">
+                        <img class="imageP" id="caviar" src="caviar.png" alt="caviar">
+                        <img class="imageP" id="champ" src="champagne.png" alt="champagne">
+                    </div>
+                </div>
+            </div>
+            <div class="separator"></div>
+            <div class="commandeDiv" id="MainDivCommande">
+                
+                <h2 id="Reservation">Reservation</h2>
+                <div class="form-container">
+                    <form id="reservationForm" onsubmit="return validateForm()">
+                        <label for="nom">Last Name:</label>
+                        <input type="text" id="nom" name="nom" required>
+                        
+                        <label for="prenom">First Name:</label>
+                        <input type="text" id="prenom" name="prenom" required>
+                        
+                        <label for="telephone">Phone Number:</label>
+                        <input type="tel" id="telephone" name="telephone" required>
+                        
+                        <label for="cb">Credit Card Number:</label>
+                        <input type="text" id="cb" name="cb" required>
+                        
+                        <label for="formule">Choose a package:</label>
+                        <select id="formule" name="formule" onchange="updatePrice()">
+                            <option value="3">3h - €1,000</option>
+                            <option value="6">6h - €2,000</option>
+                            <option value="9">9h - €3,000</option>
+                        </select>
+                        
+                        <p id="prix">Price: €1,000</p>
+                        
+                        <button type="submit">Order</button>
+                    </form>
+                </div>
+                
+                <script async defer>
+                    function updatePrice() {
+                        const formule = document.getElementById("formule").value;
+                        const prix = (formule/3) * 1000;
+                        document.getElementById("prix").innerText = "Price: " + prix + "€";
+                    }
+
+                    function validateForm() {
+                    const nom = document.getElementById("nom").value.trim();
+                    const prenom = document.getElementById("prenom").value.trim();
+                    const telephone = document.getElementById("telephone").value.trim();
+                    const cb = document.getElementById("cb").value.trim();
+
+                    if (!nom || !prenom || !telephone || !cb) {
+                        alert("Please fill in all required fields.");
+                        return false;
+                    }
+                    
+                    window.location.href = 'commande.html';
+                    return false; // Prevent actual form submission
+                }
+
+                </script>
+            </div>
+
+            <div class="separator"></div>
+            <div class="GilaniMap" id="GilaniMap">
+                <h3 id="mapTitre">How to Find Us</h2>
+                <div id="map"></div>
+                <div class="tooltip" id="tooltip"></div> <!-- Tooltip -->
+            
+                <script>
+                    var map = L.map('map', {
+                        minZoom: 2,
+                        maxZoom: 5,
+                        zoomControl: false,
+                        scrollWheelZoom: false,  // 🔹 Désactive le zoom avec la molette
+                        doubleClickZoom: false,  // 🔹 Désactive le zoom au double-clic
+                        dragging: true           // 🔹 Permet de déplacer la carte normalement
+                    }).setView([20, 0], 2);
+            
+                    // Fond blanc pour un style planisphère simple
+                    L.tileLayer('', { attribution: '' }).addTo(map);
+            
+                    // Pays en rouge par défaut
+                    const specialCountries = ["France", "United States of America", "Turkey", "United Arab Emirates"];
+            
+                    // Sélection du tooltip
+                    const tooltip = document.getElementById("tooltip");
+            
+                    // Fonction pour gérer les interactions
+                    function onEachFeature(feature, layer) {
+                        let countryName = feature.properties.name;
+                        let defaultColor = specialCountries.includes(countryName) ? 'red' : 'white';
+            
+                        layer.setStyle({ fillColor: defaultColor, fillOpacity: 1 });
+            
+                        layer.on('mouseover', function (e) {
+                            if (specialCountries.includes(feature.properties.name)){
+                                layer.setStyle({ fillColor: 'green', fillOpacity: 0.7 });
+                            } else{
+                                layer.setStyle({ fillColor: 'grey', fillOpacity: 0.7 });
+                            }
+                            
+                            
+            
+                            // Afficher le tooltip avec le nom du pays
+                            tooltip.style.display = "block";
+                            tooltip.innerHTML = specialCountries.includes(countryName) ? "We are Here" : "Not Yet";
+            
+                            document.addEventListener("mousemove", updateTooltipPosition);
+                        });
+            
+                        layer.on('mouseout', function () {
+                            layer.setStyle({ fillColor: defaultColor, fillOpacity: 1 });
+            
+                            // Cacher le tooltip
+                            tooltip.style.display = "none";
+                            document.removeEventListener("mousemove", updateTooltipPosition);
+                        });
+                    }
+            
+                    // Fonction pour déplacer le tooltip avec la souris
+                    function updateTooltipPosition(e) {
+                        tooltip.style.left = (e.pageX + 15) + "px";
+                        tooltip.style.top = (e.pageY + 15) + "px";
+                    }
+            
+                    // Chargement de la carte avec GeoJSON
+                    fetch("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json")
+                        .then(response => response.json())
+                        .then(data => {
+                            L.geoJSON(data, {
+                                style: {
+                                    color: "black",
+                                    weight: 1,
+                                    fillOpacity: 1
+                                },
+                                onEachFeature: onEachFeature
+                            }).addTo(map);
+                            document.getElementById("loading-screen").style.display = "none";
+                            document.getElementById("content").style.display = "block";
+
+                            
+                            setTimeout(() => {
+                                map.invalidateSize();
+                            }, 100);
+
+                        });
+            
+                </script>
+                </div>
+
+
+                <div class="separator"></div>
+
+                <div class="partner" id="partner">
+                    <h3 id="partnerTitre">PartnerShips</h3>
+                    <div class="partnerImg">
+                        <div>
+                            <img src="benz.jpg" alt="Benzou" class="imageP">
+                            <p>Benzema</p>
+                        </div>
+                        <div>
+                            <img src="doncic.jpg" alt="Doncic" class="imageP">
+                            <p>Doncic</p>
+                        </div>
+                        <div>
+                            <img src="mbappe.jpg" alt="Mbappe" class="imageP">
+                            <p>Mbappe</p>
+                        </div>
+                        <div>
+                            <img src="chicha_img.gif" alt="Mbappe" class="imageP">
+                            <p>Chicha</p>
+                        </div>
+
+                    </div>
+                </div>
+        </div>
 
         <script src="MainPage.js" async defer></script>
     </body>
