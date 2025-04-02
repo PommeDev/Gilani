@@ -42,23 +42,29 @@
 
         <div id="services">
             <h3 id="serviceTitre">Services</h3>
-            <img class="imageP" id="s1" src="service1.jpg" alt="chicha 1">
-            
+            <div class="serviceImage">
+                <img class="imageP" id="s1" src="service1.jpg" alt="service 1">
+                <img class="imageP" id="s1" src="service2.webp" alt="service 2">
+            </div>
         </div>
 
         <div class="separator"></div>
 
         <div id="products">
             <div class="chicha">
-                <h3 id="chichaTitre">Shishas</h3>
-                <img class="imageP" id="ch1" src="chicha1.jpg" alt="chicha 1">
-                <img class="imageP" id="ch2" src="chicha2.png" alt="chicha 2">
+                <h3 id="chichaTitre">Chichas</h3>
+                <div class="chichImage">
+                    <img class="imageP" id="ch1" src="chicha1.jpg" alt="chicha 1">
+                    <img class="imageP" id="ch2" src="chicha2.png" alt="chicha 2">
+                </div>
             </div>
             <div class="separator2"></div>
             <div class="parfum">
                 <h3 id="goutTitre">Flavors</h3>
-                <img class="imageP" id="caviar" src="caviar.png" alt="caviar">
-                <img class="imageP" id="champ" src="champagne.png" alt="champagne">
+                <div class="prodImage">
+                    <img class="imageP" id="caviar" src="caviar.png" alt="caviar">
+                    <img class="imageP" id="champ" src="champagne.png" alt="champagne">
+                </div>
             </div>
         </div>
         <div class="separator"></div>
@@ -66,7 +72,7 @@
             
             <h2 id="Reservation">Reservation</h2>
             <div class="form-container">
-                <form>
+                <form id="reservationForm" onsubmit="return validateForm()">
                     <label for="nom">Last Name:</label>
                     <input type="text" id="nom" name="nom" required>
                     
@@ -77,7 +83,7 @@
                     <input type="tel" id="telephone" name="telephone" required>
                     
                     <label for="cb">Credit Card Number:</label>
-                    <input type="text" id="cb" name="cb">
+                    <input type="text" id="cb" name="cb" required>
                     
                     <label for="formule">Choose a package:</label>
                     <select id="formule" name="formule" onchange="updatePrice()">
@@ -88,7 +94,7 @@
                     
                     <p id="prix">Price: €1,000</p>
                     
-                    <button onclick="window.location.href='commande.html'">Order</button>
+                    <button type="submit">Order</button>
                 </form>
             </div>
             
@@ -98,6 +104,22 @@
                     const prix = (formule/3) * 1000;
                     document.getElementById("prix").innerText = "Price: " + prix + "€";
                 }
+
+                function validateForm() {
+                const nom = document.getElementById("nom").value.trim();
+                const prenom = document.getElementById("prenom").value.trim();
+                const telephone = document.getElementById("telephone").value.trim();
+                const cb = document.getElementById("cb").value.trim();
+
+                if (!nom || !prenom || !telephone || !cb) {
+                    alert("Please fill in all required fields.");
+                    return false;
+                }
+                
+                window.location.href = 'commande.html';
+                return false; // Prevent actual form submission
+            }
+
             </script>
         </div>
 
@@ -184,10 +206,22 @@
 
             <div class="separator"></div>
 
-            <div class="partenaireDiv" id="partner">
-                <img src="benz.jpg" alt="Benzou" class="imageP">
-                <img src="doncic.jpg" alt="Doncic" class="imageP">
-                <img src="mbappe.jpg" alt="Mbappe" class="imageP">   
+            <div class="partner" id="partner">
+                <h3 id="partnerTitre">PartnerShips</h3>
+                <div class="partnerImg">
+                    <div>
+                        <img src="benz.jpg" alt="Benzou" class="imageP">
+                        <p>Benzema</p>
+                    </div>
+                    <div>
+                        <img src="doncic.jpg" alt="Doncic" class="imageP">
+                        <p>Doncic</p>
+                    </div>
+                    <div>
+                        <img src="mbappe.jpg" alt="Mbappe" class="imageP">
+                        <p>Mbappe</p>
+                    </div>
+                </div>
             </div>
 
 

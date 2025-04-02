@@ -6,6 +6,11 @@
     font-family: Arial, sans-serif;
 }
 
+
+h3 {
+    color: #F79C00
+}
+
 /* 🏷️ Titre principal */
 .mainTilte {
     font-size: 3rem;
@@ -41,6 +46,7 @@
     display: block;
     position: relative;
     width: 100%;
+    color: #5698AD;
 }
 
 /* Effet incurvé */
@@ -105,7 +111,7 @@
 }
 
 /* 📌 Style de la section produits */
-#products, #services {
+#products, #services, #partner {
     display: flex;
     flex-direction: column; /* 🔹 Empile les sections en colonne */
     align-items: center;
@@ -132,7 +138,7 @@
 
 
 /* 🏷️ Titres centrés */
-#chichaTitre, #goutTitre, #mapTitre, #serviceTitre {
+#chichaTitre, #goutTitre, #mapTitre, #serviceTitre, #partnerTitre {
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
@@ -140,10 +146,18 @@
 }
 
 /* 📦 Style des conteneurs */
-.chicha, .parfum {
+.chicha, .parfum, .partner {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+}
+
+.chichImage, .prodImage, .serviceImage, .partnerImage {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; /* Centrage horizontal */
     width: 100%;
 }
 
@@ -246,4 +260,22 @@ p#prix {
     font-size: 18px;
     font-weight: bold;
     color: #333;
+}
+
+
+/* Style to align the 3 divs side by side */
+.partnerImg {
+    display: flex;
+    justify-content: center; /* Centering all items */
+    gap: 20px; /* Spacing between items */
+}
+
+.partnerImg div {
+    text-align: center; /* Center text under images */
+}
+
+.imageP {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
