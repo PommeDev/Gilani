@@ -22,7 +22,7 @@ h3 {
 /* 📍 Logo à droite du titre */
 #GilaniT {
     font-size: 5rem; /* Augmente la taille */
-    color: #3F7384; /* Bleu foncé */
+    color: #203a42; /* Bleu foncé */
     position: relative;
     text-align: center;
     font-family: "Zeyada", cursive;
@@ -66,7 +66,7 @@ h3 {
 }
 
 .menu a {
-    color: white;
+    color: #FFD700;
     text-decoration: none;
     font-size: 1.2rem;
     padding: 10px 15px;
@@ -287,12 +287,18 @@ p#prix {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: #5698AD;
+    background: #29374A;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 9999;
 }
+
+#load_img{
+    width: 55%;
+    height: 75%;
+}
+
 #content {
     display: none;
 }
@@ -305,3 +311,60 @@ p#prix {
 }
 .image1 { top: 10px; left: 20px; }
 .image3 { bottom: 20px; right: 30px; }
+
+
+
+
+.title_div {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    max-width: 100%; /* ou la largeur max que tu veux */
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+#title_background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: auto;
+    z-index: 0;
+    object-fit: contain;
+    opacity: 0.3; /* ajuste l’opacité selon ton besoin */
+}
+
+footer {
+    background-color: #111;
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.footer-item {
+    display: flex;
+    flex-direction: column; /* empile texte au-dessus de l'image */
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-item p {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.footer-item img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.footer-item img:hover {
+    transform: scale(1.1);
+}
